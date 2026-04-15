@@ -1,15 +1,28 @@
 class Solution {
     public double findMedianSortedArrays(int[] nums1, int[] nums2) {
+        if(nums1.length > nums2.length){
+            return findMedianSortedArrays(nums2,nums1);
+        }
         int m = nums1.length, n = nums2.length;
-        int[] ans = new int[m+n];
+        int l = 0, r = m;
+        while(l <= r){
+            int Px = l + (r - l)/2;
+            int Py = (m+n+1)/2 - Px;
 
-        for(int i = 0;i < m;i++) ans[i] = nums1[i];
-        for(int i = 0;i < n;i++) ans[m+i] = nums2[i];
+            int x1 = (Px == 0) ? Integer.MIN_VALUE : nums1[Px-1];
+            int x2 = (Py == 0) ? Integer.MIN_VALUE : nums2[Py-1];
+            int x3 = (Px == m) ? Integer.MAX_VALUE : nums1[Px];
+            int x4 = (Py == n) ? Integer.MAX_VALUE : nums2[Py];
 
-        Arrays.sort(ans);
-
-        int total = m+n;
-        if(total % 2 == 1) return ans[total/2];
-        else return (ans[total/2] + ans[total/2-1])/2.0;
+            if(x1 <= x4 && x2 <= x3){
+                if((m+n) % 2 == 1){
+                    return Math.max(x1,x2);
+                }
+                return (Math.max(x1,x2) + Math.min(x3,x4))/2.0;
+            }
+            if(x1 > x4) r = Px-1;
+            else l = Px+1;
+        }
+        return -1;
     }
 }
