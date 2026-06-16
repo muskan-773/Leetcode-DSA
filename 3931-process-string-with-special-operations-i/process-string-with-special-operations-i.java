@@ -10,7 +10,7 @@ class Solution {
             } else if (ch == '#') {
                 res.append(res);
             } else if (ch == '*') {
-                if (res.length() > 0) {
+                if (!res.isEmpty()) {
                     res.deleteCharAt(res.length() - 1);
                 }
             } else {
