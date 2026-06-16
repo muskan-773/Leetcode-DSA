@@ -8,7 +8,7 @@ class Solution {
             if (ch == '%') {
                 res.reverse();
             } else if (ch == '#') {
-                res.append(res);
+                res.append(res.toString());
             } else if (ch == '*') {
                 if (!res.isEmpty()) {
                     res.deleteCharAt(res.length() - 1);
