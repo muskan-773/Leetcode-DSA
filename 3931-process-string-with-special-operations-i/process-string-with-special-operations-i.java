@@ -13,7 +13,7 @@ class Solution {
                 if (!res.isEmpty()) {
                     res.deleteCharAt(res.length() - 1);
                 }
-            } else {
+            } else if (ch >= 'a' && ch <= 'z') {
                 res.append(ch);
             }
         }
